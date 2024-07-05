@@ -1,4 +1,4 @@
-import profissional from "../models/profissional_model.js";
+import profissional from "../../models/profissional_model.js";
 
 export const getProfissionais = async (req, res) => {
     try {

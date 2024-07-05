@@ -1,3 +1,6 @@
+
+
+/**
 import { Sequelize } from "sequelize";
 
 const db = new Sequelize('UniversoDown', 'root', '', {
@@ -6,3 +9,4 @@ const db = new Sequelize('UniversoDown', 'root', '', {
 })
 
 export default db
+ */
