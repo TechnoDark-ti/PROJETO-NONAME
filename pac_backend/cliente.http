@@ -1,0 +1,68 @@
+GET http://localhost:3000/profissionais HTTP/1.1
+Content-Type: application/json
+###
+
+
+GET http://localhost:3000/atividades HTTP/1.1
+Content-Type: application/json
+###
+
+
+GET http://localhost:3000/associados HTTP/1.1
+Content-Type: application/json
+###
+
+
+POST http://localhost:3000/profissionais HTTP/1.1
+Content-Type: application/json
+{
+    "id_profissional": , 
+	"nome_profissional": , 
+	"profissao":  
+}
+###
+
+
+POST http://localhost:3000/atividades HTTP/1.1
+Content-Type: application/json
+{
+    "id_atividade": , 
+	"nome_atividade": , 
+	"horario": , 
+	"id_profissional":  
+}
+###
+
+
+POST http://localhost:3000/associados HTTP/1.1
+Content-Type: application/json
+{
+    "id_associado": 3, 
+	"nome_associado": "Maria", 
+	"dta_nascimento": "8-8-4290",
+	"idade_associado": 12, 
+	"telefone": "1234567890", 
+	"nome_responsavel": "Maria", 
+	"endereco": "FHUEKH", 
+	"bairro": "fdilo", 
+	"numero": 0, 
+	"CEP": "334534223", 
+	"observacoes": "Nao", 
+	"atividade": "Lobotomia"  
+}
+###
+
+
+DELETE http://localhost:3000/profissional/2 HTTP/1.1
+Content-Type: application/json
+###
+
+
+DELETE http://localhost:3000/atividade/2 HTTP/1.1
+Content-Type: application/json
+###
+
+
+DELETE http://localhost:3000/associado/2 HTTP/1.1
+Content-Type: application/json
+###
