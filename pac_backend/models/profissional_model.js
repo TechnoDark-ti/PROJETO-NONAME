@@ -1,24 +1,26 @@
-import { HasMany, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 import db from "../config/database.js";
 
-const Profissional = db.define('profissional', {
+const Profissional = db.define('Profissional', {
     id_profissional: {
-        type: Sequelize.INTEGER, 
-        primaryKey: true
+        type: DataTypes.INTEGER, 
+        primaryKey: true,
+        autoIncrement: true
     }, 
 
     nome_profissional: {
-        type: Sequelize.VARCHAR(100)
+        type: DataTypes.STRING(100),
+        allowNull: false
     }, 
 
     profissao: {
-        type: Sequelize.VARCHAR(100)
-    },
+        type: DataTypes.STRING(50),
+        allowNull: false
+    }
 }, 
 {
     timestamps: false, 
     freezeTableName: true
-}
-)
+});
 
-export default Profissional
+export default Profissional;

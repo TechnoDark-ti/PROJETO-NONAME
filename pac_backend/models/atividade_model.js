@@ -1,39 +1,45 @@
-import { HasMany, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 import db from "../config/database.js";
-import Profissional from "./profissional_model";
+import Profissional from "./profissional_model.js";
 
-const Atividade = db.define('atividade', {
+const Atividade = db.define('Atividade', {
     id_atividade: {
-        type: Sequelize.INTEGER, 
-        primaryKey: true
+        type: DataTypes.INTEGER, 
+        primaryKey: true,
+        autoIncrement: true
     }, 
 
     nome_atividade: {
-        type: Sequelize.VARCHAR(100)
+        type: DataTypes.STRING(50),
+        allowNull: false
     }, 
 
     horario: {
-        type: Sequelize.TIME
+        type: DataTypes.TIME,
+        allowNull: false
     }, 
 
-    profissional: {
-        type: Sequelize.INTEGER
+    id_profissional: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Profissional,
+            key: 'id_profissional'
+        }
     }
 }, 
 {
     timestamps: false, 
     freezeTableName: true
-})
+});
 
-Atividade.associate = (models) => {
-    Atividade.hasMany(models.Profissional, 
-        {
-            foreignKey: 'profissional', as: 'profissional'
-        }
-    )
-}
+Profissional.hasMany(Atividade, {
+    foreignKey: 'id_profissional',
+    as: 'atividades'
+});
 
-Atividade.belongsTo(Profissional, {foreignKey:'id_profissional', allowNull:true})
+Atividade.belongsTo(Profissional, {
+    foreignKey: 'id_profissional',
+    as: 'profissional'
+});
 
-
-export default Atividade
+export default Atividade;

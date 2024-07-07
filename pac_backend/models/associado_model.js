@@ -1,70 +1,84 @@
-import { HasMany, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 import db from "../config/database.js";
-import Atividade from "../models/atividade_model.js"
+import Atividade from "./atividade_model.js";
 
-const Associado = db.define('associado', {
+const Associado = db.define('Associado', {
     id_associado: {
-        type: Sequelize.INTEGER, 
-        primaryKey: true
+        type: DataTypes.INTEGER, 
+        primaryKey: true,
+        autoIncrement: true
     }, 
 
     nome_associado: {
-        type: Sequelize.VARCHAR(100)
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
 
     dta_nascimento: {
-        type: Sequelize.DATE
+        type: DataTypes.DATE,
+        allowNull: false
     }, 
 
     idade_associado: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
     }, 
 
     telefone: {
-        type: Sequelize.VARCHAR(15)
+        type: DataTypes.STRING(15),
+        allowNull: false
     }, 
 
     nome_responsavel: {
-        type: Sequelize.VARCHAR(100)
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
 
     endereco: {
-        type: Sequelize.VARCHAR(50)
+        type: DataTypes.STRING(50),
+        allowNull: false
     }, 
 
     bairro: {
-        type: Sequelize.VARCHAR(50)
+        type: DataTypes.STRING(50),
+        allowNull: false
     }, 
 
     numero: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
     }, 
 
     CEP: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
     }, 
 
     observacoes: {
-        type: Sequelize.VARCHAR(100)
+        type: DataTypes.STRING(100)
     }, 
 
     atividade: {
-        type: Sequelize.INTEGER
-    },
+        type: DataTypes.INTEGER,
+        references: {
+            model: Atividade,
+            key: 'id_atividade'
+        }
+    }
 },
 {
     timestamps: false, 
     freezeTableName: true
-})
+});
 
-Associado.associate = (models) => {
-    Associado.hasMany(models.Atividade, 
-        {
-            foreignKey: 'atividade', as: 'atividade'
-        }
-    )
-}
+Atividade.hasMany(Associado, {
+    foreignKey: 'atividade',
+    as: 'associados'
+});
 
-Associado.belongsTo(Atividade, {foreignKey:'id_atividade', allowNull:true})
+Associado.belongsTo(Atividade, {
+    foreignKey: 'atividade',
+    as: 'atividade'
+});
 
-export default Associado
+export default Associado;
