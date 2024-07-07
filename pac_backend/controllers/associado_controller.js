@@ -1,55 +1,55 @@
-import associado from "../models/associado_model.js";
+import Associado from "../models/associado_model.js";
 
-
-export const getAssociados= async (req, res) => {
+export const getAssociados = async (req, res) => {
     try {
-        const associados = await associado.findAll()
-        res.send(associados)
-    } catch (erro) {
-        console.log("Erro ao acessar a tabela associado")
+        const associados = await Associado.findAll();
+        res.json(associados);
+    } catch (error) {
+        console.error("Erro ao acessar a tabela associado:", error.message);
+        res.status(500).json({ error: "Erro ao buscar associados." });
     }
-}
+};
 
-
-export const createAssociados = async(req, res) => {
+export const createAssociado = async (req, res) => {
     try {
-        await associado.create(req.body)
-        res.json({ "message":"Um novo registro foi inserido na tabela associado"})
-    } catch (erro) {
-       console.log("Erro ao inserir um novo associado", erro) 
+        const novoAssociado = await Associado.create(req.body);
+        res.status(201).json({ message: "Novo associado inserido com sucesso.", novoAssociado });
+    } catch (error) {
+        console.error("Erro ao inserir um novo associado:", error.message);
+        res.status(400).json({ error: "Erro ao inserir um novo associado." });
     }
-}
-
+};
 
 export const updateAssociado = async (req, res) => {
     try {
-        await associado.update(req.body, {
+        const associadoAtualizado = await Associado.update(req.body, {
             where: {
                 id_associado: req.params.id
             }
-        })
-        res.json({
-            "message": "Associado " + req.params.id + "foi atualizado"
-        })
-    } catch (erro) {
-        console.log("Erro ao atualizar registro associado", erro)
-        
+        });
+        if (associadoAtualizado[0] === 0) {
+            return res.status(404).json({ error: "Associado não encontrado." });
+        }
+        res.json({ message: `Associado ${req.params.id} atualizado com sucesso.` });
+    } catch (error) {
+        console.error("Erro ao atualizar registro do associado:", error.message);
+        res.status(400).json({ error: "Erro ao atualizar registro do associado." });
     }
-}
-
+};
 
 export const deleteAssociado = async (req, res) => {
     try {
-        await associado.destroy({
+        const associadoExcluido = await Associado.destroy({
             where: {
                 id_associado: req.params.id
             }
-        })
-        res.json({
-            "message": "Associado " + req.params.id + "foi Excluido"
-        })
-    } catch (erro) {
-        console.log("Erro ao excluir registro associado", erro)
-        
+        });
+        if (!associadoExcluido) {
+            return res.status(404).json({ error: "Associado não encontrado." });
+        }
+        res.json({ message: `Associado ${req.params.id} excluído com sucesso.` });
+    } catch (error) {
+        console.error("Erro ao excluir registro do associado:", error.message);
+        res.status(400).json({ error: "Erro ao excluir registro do associado." });
     }
-}
+};
