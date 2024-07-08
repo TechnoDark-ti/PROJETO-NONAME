@@ -29,7 +29,7 @@ Projeto UniversonDown que inclui uma API em Node.js com MySQL para o backend e u
 
 3. **Configuração do Banco de Dados:**
 
-   - Crie um banco de dados MySQL chamado `UniversoDown`.
+   - Importe o banco de dados MySQL chamado `UniversoDown` no diretorio '/bd'.
    - Execute os scripts SQL fornecidos em `pac_backend/database-scripts` para criar as tabelas e dados iniciais.
 
 4. **Configuração do Backend:**
