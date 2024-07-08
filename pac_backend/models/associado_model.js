@@ -1,84 +1,55 @@
-import { DataTypes } from "sequelize";
-import db from "../config/database.js";
-import Atividade from "./atividade_model.js";
+import { Sequelize } from 'sequelize';
+import sequelize from '../config/db.js';
+import Atividade from './atividade_model.js';
 
-const Associado = db.define('Associado', {
+const Associado = sequelize.define('associado', {
     id_associado: {
-        type: DataTypes.INTEGER, 
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    }, 
-
+    },
     nome_associado: {
-        type: DataTypes.STRING(100),
-        allowNull: false
+        type: Sequelize.STRING
     },
-
     dta_nascimento: {
-        type: DataTypes.DATE,
-        allowNull: false
-    }, 
-
-    idade_associado: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    }, 
-
-    telefone: {
-        type: DataTypes.STRING(15),
-        allowNull: false
-    }, 
-
-    nome_responsavel: {
-        type: DataTypes.STRING(100),
-        allowNull: false
+        type: Sequelize.DATE
     },
-
+    idade_associado: {
+        type: Sequelize.INTEGER
+    },
+    telefone: {
+        type: Sequelize.STRING
+    },
+    nome_responsavel: {
+        type: Sequelize.STRING
+    },
     endereco: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    }, 
-
+        type: Sequelize.STRING
+    },
     bairro: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    }, 
-
+        type: Sequelize.STRING
+    },
     numero: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    }, 
-
+        type: Sequelize.INTEGER
+    },
     CEP: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    }, 
-
+        type: Sequelize.INTEGER
+    },
     observacoes: {
-        type: DataTypes.STRING(100)
-    }, 
-
-    atividade: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.STRING
+    },
+    atividadeId: {
+        type: Sequelize.INTEGER,
         references: {
             model: Atividade,
             key: 'id_atividade'
         }
     }
-},
-{
-    timestamps: false, 
-    freezeTableName: true
+}, {
+    timestamps: false,
+    tableName: 'Associado'
 });
 
-Atividade.hasMany(Associado, {
-    foreignKey: 'atividade',
-    as: 'associados'
-});
-
-Associado.belongsTo(Atividade, {
-    foreignKey: 'atividade',
-    as: 'atividade'
-});
+Associado.belongsTo(Atividade, { foreignKey: 'atividadeId', as: 'atividade' });
 
 export default Associado;
