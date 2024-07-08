@@ -1,17 +1,38 @@
 <template>
   <div>
     <h1>Home Page</h1>
-    <p>This is the Home page content.</p>
+    <ul>
+      <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+import axios from '../plugins/axios';
+
 export default {
-  name: 'HomePage', // Nome multi-palavra
-  // Component details
+  name: 'HomePage', // Renomeando o componente para 'HomePage'
+  data() {
+    return {
+      items: [],
+    };
+  },
+  created() {
+    this.fetchItems();
+  },
+  methods: {
+    async fetchItems() {
+      try {
+        const response = await axios.get('/items');
+        this.items = response.data;
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
-/* Estilos */
+/* Estilos específicos para este componente */
 </style>
