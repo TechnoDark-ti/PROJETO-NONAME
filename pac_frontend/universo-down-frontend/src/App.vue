@@ -21,7 +21,7 @@ export default {
 
 <style>
 @import '~bootstrap/dist/css/bootstrap.css';
-@import '~bootstrap-vue/dist/bootstrap-vue.css';
+@import '~bootstrap-vue-3/dist/bootstrap-vue-3.css';
 
 html, body, #app {
   height: 100%;
