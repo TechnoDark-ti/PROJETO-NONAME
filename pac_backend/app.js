@@ -1,3 +1,8 @@
+/**
+ * #### Código principal ###
+ * - Aquele que faz a conexão com o banco e as demais instâncias no node
+ */
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import associadoRoutes from './routes/associadoRoutes.js';
