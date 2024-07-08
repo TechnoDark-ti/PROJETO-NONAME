@@ -1,7 +1,7 @@
 
 # Projeto UniversoDown
 
-Este é um projeto completo que inclui uma API em Node.js com MySQL para o backend e um frontend em Vue.js com Bootstrap.
+Projeto UniversonDown que inclui uma API em Node.js com MySQL para o backend e um frontend em Vue.js com Bootstrap.
 
 ## Instalação
 
